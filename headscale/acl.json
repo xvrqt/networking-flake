@@ -1,0 +1,15 @@
+{
+  "tagOwners": {
+    "tag:exit": ["crow@"]
+  },
+  "autoApprovers": {
+    "exitNode": ["tag:exit"]
+  },
+  "acls": [
+    {
+      "action": "accept",
+      "src": ["*"],
+      "dst": ["*:*"]
+    }
+  ]
+}
