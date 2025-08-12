@@ -52,6 +52,7 @@ rec {
       };
 
       git = "wg";
+      fail2ban = true;
     };
     # Home Server
     archive = {
@@ -74,6 +75,7 @@ rec {
       };
 
       git = "tailnet";
+      fail2ban = true;
     };
     # Apple M1 Ashai-Linux Lappy
     spark = {
@@ -94,6 +96,7 @@ rec {
       };
 
       git = "tailnet";
+      fail2ban = false;
     };
     # Amy's Cell Phone (not managed by this flake)
     third-lobe = {
@@ -128,6 +131,7 @@ rec {
       };
 
       git = "tailnet";
+      fail2ban = false;
     };
   };
 

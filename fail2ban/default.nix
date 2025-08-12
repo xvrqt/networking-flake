@@ -1,5 +1,10 @@
+{ lib, cfg, name, ... }:
+let
+  machine = cfg.machines."${name}";
+  cfgCheck = machine.fail2ban;
+in
 {
-  services.fail2ban = {
+  services.fail2ban = lib.mkIf cfgCheck {
     enable = true;
     # Ban IP after 5 failures
     maxretry = 5;
@@ -27,6 +32,7 @@
     };
 
     # Found at https://dataswamp.org/~solene/2022-10-02-nixos-fail2ban.html
+    # TODO check if these services are actually running
     jails = {
       # max 6 failures in 600 seconds
       "nginx-spam" = ''
