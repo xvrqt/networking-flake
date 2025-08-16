@@ -16,7 +16,8 @@ let
   # Only allow requests made over secure interfaces
   wg_ip = "${cfg.machines."${name}".ip.v4.wg}:${toString dnsPort}";
   tailnet_ip = "${cfg.machines."${name}".ip.v4.tailnet}:${toString dnsPort}";
-  blockyDNSPort = if is_nameserver then [ tailnet_ip wg_ip ] else dnsPort;
+  local_ip = "127.0.0.1:${toString dnsPort}";
+  blockyDNSPort = [ tailnet_ip wg_ip local_ip];
 in
 {
   networking = {
