@@ -17,7 +17,7 @@ let
   wg_ip = "${cfg.machines."${name}".ip.v4.wg}:${toString dnsPort}";
   tailnet_ip = "${cfg.machines."${name}".ip.v4.tailnet}:${toString dnsPort}";
   local_ip = "127.0.0.1:${toString dnsPort}";
-  blockyDNSPort = [ tailnet_ip wg_ip local_ip];
+  blockyDNSPort = [ tailnet_ip wg_ip local_ip ];
 in
 {
   networking = {
@@ -44,7 +44,7 @@ in
       enableACME = true;
       acmeRoot = null;
       # Only allow internal people to use this endpoint
-      listenAddresses = [ "100.64.0.8" "10.128.0.1" ];
+      listenAddresses = [ "10.128.0.1" ];
       locations."/" = {
         proxyPass = "http://127.0.0.1:${(builtins.toString httpPort)}";
         proxyWebsockets = false;

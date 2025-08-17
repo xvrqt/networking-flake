@@ -5,7 +5,7 @@ let
 in
 {
   services.fail2ban = lib.mkIf cfgCheck {
-    enable = true;
+    enable = false;
     # Ban IP after 5 failures
     maxretry = 5;
 
