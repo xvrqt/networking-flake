@@ -44,7 +44,7 @@ in
       enableACME = true;
       acmeRoot = null;
       # Only allow internal people to use this endpoint
-      listenAddresses = [ "100.64.0.8" "10.128.0.1" ];
+      listenAddresses = [ "10.128.0.1" ];
       locations."/" = {
         proxyPass = "http://127.0.0.1:${(builtins.toString httpPort)}";
         proxyWebsockets = false;
