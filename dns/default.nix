@@ -25,7 +25,7 @@ in
     # If they don't for some reason, try these as fallbacks
     nameservers =
       # If you're running a DNS server then just use yourself 
-      if is_nameserver then [ "127.0.0.1" ]
+      if is_nameserver then ([ "127.0.0.1" ] ++ dns.quad9.ip.v4 ++ dns.quad9.ip.v6)
       else dns.personal ++ dns.quad9.ip.v4 ++ dns.quad9.ip.v6;
 
     # Open ports to allow connection to the DNS server
