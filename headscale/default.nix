@@ -31,7 +31,7 @@ if cfgCheck then {
 
       settings = {
         # Where new clients can sign up
-        server_url = "https://${gateway_subdomain}";
+        server_url = "http://${gateway_subdomain}";
 
         # This is what the developers recommend and what they test on
         # PostGres seems heavy for such a simple VPS 
