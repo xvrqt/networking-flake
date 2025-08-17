@@ -99,8 +99,6 @@ in
               "gateway.irlqt.net" = machines.lighthouse.ip.v4.www;
 
               # Services Hosted by the Archive
-              "cryptpad.irlqt.net" = archive;
-              "cryptpad-sandbox.irlqt.net" = archive;
               "git.irlqt.net" = archive;
               "immich.irlqt.net" = archive;
               "irlqt.me" = archive;
@@ -112,6 +110,7 @@ in
               "sonarr.irlqt.net" = archive;
               "torrents.irlqt.net" = archive;
               "wiki.irlqt.net" = archive;
+              "plex.irlqt.net" = archive;
             };
         };
 
