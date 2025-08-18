@@ -62,7 +62,8 @@ if cfgCheck then {
       virtualHosts."${gateway_subdomain}" = {
         # Listen on the clear net, tailnet and wireguard interfaces
         listenAddresses = [
-          machine.ip.v4.wg
+          # machine.ip.v4.wg
+          "0.0.0.0"
           # machine.ip.v4.www
         ];
 
