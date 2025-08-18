@@ -63,7 +63,7 @@ if cfgCheck then {
         # Listen on the clear net, tailnet and wireguard interfaces
         listenAddresses = [
           machine.ip.v4.wg
-          machine.ip.v4.www
+          # machine.ip.v4.www
         ];
 
         # HTTPS only
