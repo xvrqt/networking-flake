@@ -64,6 +64,8 @@ in
           prefetching = true;
         };
 
+        init.strategy = "fast";
+
         # Where to look up records if you don't have them
         upstreams = {
           groups = {
