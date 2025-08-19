@@ -64,8 +64,6 @@ in
           prefetching = true;
         };
 
-        init.strategy = "fast";
-
         # Where to look up records if you don't have them
         upstreams = {
           groups = {
@@ -73,6 +71,7 @@ in
           };
           timeout = "3s";
           strategy = "parallel_best";
+          init.strategy = "fast";
         };
 
         # Used to lookup and resolve domain names used in the upstreams list
