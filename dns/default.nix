@@ -116,6 +116,8 @@ in
               "immich.public.irlqt.net" = archive;
               "public.immich.irlqt.net" = archive;
               "public.monero.nodes.archive.irlqt.net" = archive;
+
+              "copyparty.irlqt.net" = archive;
             };
         };
 
