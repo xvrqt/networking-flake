@@ -33,6 +33,12 @@ in
       allowedTCPPorts = [ dnsPort ];
       allowedUDPPorts = [ dnsPort ];
     };
+
+    # If we're a nameserver, have resolvConf use Blocky the resolver
+    resolvconf = lib.mkIf is_nameserver {
+      enable = true;
+      useLocalResolver = true;
+    };
   };
 
   # Act as a DNS server
