@@ -120,6 +120,7 @@ in
               "torrents.irlqt.net" = archive;
               "wiki.irlqt.net" = archive;
               "plex.irlqt.net" = archive;
+              "slsk.irlqt.net" = archive;
 
               "immich.public.irlqt.net" = archive;
               "public.immich.irlqt.net" = archive;
