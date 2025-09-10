@@ -113,6 +113,7 @@ in
               "nzbget.irlqt.net" = archive;
               "prowlarr.irlqt.net" = archive;
               "radarr.irlqt.net" = archive;
+              "lidarr.irlqt.net" = archive;
               "search.irlqt.net" = archive;
               "sonarr.irlqt.net" = archive;
               "torrents.irlqt.net" = archive;
