@@ -110,6 +110,7 @@ in
               "immich.irlqt.net" = archive;
               "irlqt.me" = archive;
               "jellyseerr.irlqt.net" = archive;
+              "jellyfin.irlqt.net" = archive;
               "nzbget.irlqt.net" = archive;
               "prowlarr.irlqt.net" = archive;
               "radarr.irlqt.net" = archive;
