@@ -122,6 +122,7 @@ in
               "wiki.irlqt.net" = archive;
               "plex.irlqt.net" = archive;
               "slsk.irlqt.net" = archive;
+              "auth.irlqt.net" = lighthouse;
 
               "immich.public.irlqt.net" = archive;
               "public.immich.irlqt.net" = archive;
