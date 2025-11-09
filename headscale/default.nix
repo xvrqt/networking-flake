@@ -23,6 +23,22 @@ let
   reverse_proxy_present = config.services?websites && config.services.websites?enable;
 in
 if cfgCheck then {
+  # Decrypts & Deploys the Authentik master secret
+  age.secrets.oidcHeadscaleSecret = {
+    # The secret file that will be decrypted
+    file = ./secrets + ("/" + "oidc.key");
+    # Folder to decrypt into (config.age.secretDir/'path')
+    name = "authentik/headscale.key";
+
+    # File Permissions
+    mode = "400";
+    owner = "headscale";
+
+    # Symlink from the secretDir to the 'path'
+    # Doesn't matter since both are in the same partition
+    symlink = true;
+  };
+
   # Run a Headscale coordination server for all other nodes
   services = {
     headscale = {
@@ -41,6 +57,16 @@ if cfgCheck then {
         policy = {
           mode = "file";
           path = ./acl.json;
+        };
+
+        oidc = {
+          issuer = "https://auth.irlqt.net/application/o/headscale/";
+          client_id = "Gu7qBzf5ONaomeS2p2jXdPTsiKAXfGJnw8WAHtUW";
+          client_secret_path = config.age.secrets.oidcHeadscaleSecret.path;
+
+          pkce = {
+            enabled = false;
+          };
         };
 
         dns = {
@@ -63,7 +89,10 @@ if cfgCheck then {
         # Listen on the clear net, tailnet and wireguard interfaces
         listenAddresses = [
           # machine.ip.v4.wg
-          "0.0.0.0"
+          # "0.0.0.0"
+          "135.181.109.173"
+          "100.64.0.8"
+          "10.128.0.1"
           # machine.ip.v4.www
         ];
 
