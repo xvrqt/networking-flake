@@ -2,8 +2,9 @@ rec {
   auth = {
     domain = "auth.irlqt.net";
   };
-  headscale = {
+  headscale = rec {
     domain = "irlqt.net";
+    login_server = "https://gateway.${domain}";
   };
   tailscale = {
     interface = "irlqt-net";
