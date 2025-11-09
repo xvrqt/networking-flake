@@ -1,4 +1,7 @@
 rec {
+  auth = {
+    domain = "auth.irlqt.net";
+  };
   headscale = {
     domain = "irlqt.net";
   };
