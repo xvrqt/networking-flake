@@ -2,15 +2,27 @@
   inputs = {
     # Used to set up Wireguard keys
     secrets.url = "git+https://git.irlqt.net/crow/secrets-flake";
+    # Used to keep the other inputs in lock-step
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    # My flake utils
+    flake-utils = {
+      url = "git+https://git.irlqt.net/crow/flake-utils";
+      flake = false;
+    };
+
   };
   outputs =
-    { secrets, ... }:
+    { flake-utils, nixpkgs, secrets, ... }:
     let
       names = [ "lighthouse" "archive" "spark" "nyaa" "third-lobe" ];
       cfg = import ./cfg.nix;
 
       # Keeping things DRY
       configureMachine = { lib, pkgs, name, config, ... }:
+        let
+          # Tools! I need my tools!
+          utils = (import "${flake-utils}/default.nix" { inherit pkgs; });
+        in
         {
           imports = [
             # Needs the secrets module to function since we will be deploying
@@ -20,7 +32,7 @@
             # (if needs_proxy then websites.nixosModules.minimal else null)
 
             # General network settings that should be in effect across all devices
-            (import ./general.nix { inherit cfg pkgs name; })
+            (import ./general.nix { inherit cfg lib pkgs name utils config; })
             # Configure the Wireguard interface
             (import ./wireguard { inherit cfg lib name config; })
             # Configure the Tailnet
