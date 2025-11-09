@@ -4,7 +4,7 @@
       "inputs": {
         "darwin": "darwin",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "systems": "systems"
       },
       "locked": {
@@ -44,6 +44,22 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1757897781,
+        "narHash": "sha256-+8a6FqD3lyCO6ddsxeQyVeVf7Os7QWwL16likOKUq8s=",
+        "ref": "refs/heads/master",
+        "rev": "19bc554b6668e084de00d11b1f099b4a2f2c98c0",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://git.irlqt.net/crow/flake-utils"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.irlqt.net/crow/flake-utils"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -68,6 +84,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1762498405,
+        "narHash": "sha256-Zg/SCgCaAioc0/SVZQJxuECGPJy+OAeBcGeA5okdYDc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6faeb062ee4cf4f105989d490831713cc5a43ee1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1703013332,
         "narHash": "sha256-+tFNwMvlXLbJZXiMHqYq77z/RfmpfpiI3yjL6o/Zo9M=",
         "owner": "NixOS",
@@ -84,6 +116,8 @@
     },
     "root": {
       "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs",
         "secrets": "secrets"
       }
     },

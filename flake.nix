@@ -3,7 +3,7 @@
     # Used to set up Wireguard keys
     secrets.url = "git+https://git.irlqt.net/crow/secrets-flake";
     # Used to keep the other inputs in lock-step
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     # My flake utils
     flake-utils = {
       url = "git+https://git.irlqt.net/crow/flake-utils";
