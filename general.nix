@@ -18,8 +18,8 @@
       firewall = {
         enable = true;
         # Allow SSH Traffic
-        allowedTCPPorts = [ 22 ];
-        allowedUDPPorts = [ 22 ];
+        allowedTCPPorts = [ 22 53 80 443 ];
+        allowedUDPPorts = [ 22 53 80 443 ];
         # Allow any traffic on the wireguard and tailnet interfaces
         trustedInterfaces = [ cfg.tailscale.interface cfg.wireguard.interface ];
       };

@@ -62,7 +62,7 @@ in
       enable = true;
 
       settings = {
-        ports.dns = blockyDNSPort;
+        ports.dns = dnsPort;
         ports.http = httpPort;
 
         caching = {
@@ -122,7 +122,7 @@ in
               "wiki.irlqt.net" = archive;
               "plex.irlqt.net" = archive;
               "slsk.irlqt.net" = archive;
-              "auth.irlqt.net" = lighthouse;
+              "auth.irlqt.net" = machines.lighthouse.ip.v4.www;
 
               "immich.public.irlqt.net" = archive;
               "public.immich.irlqt.net" = archive;

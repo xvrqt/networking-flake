@@ -27,6 +27,7 @@ in
         message = "advertiseExitNode must be false if exitNode is set";
       }
     ];
+
     # Decrypts & Deploys the Authentik master secret
     age.secrets.tailscaleNewNodeKey = {
       # The secret file that will be decrypted
