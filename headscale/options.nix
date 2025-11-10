@@ -10,7 +10,7 @@
 
         useAuthServer = lib.mkOption {
           type = lib.types.bool;
-          default = (config.services.authentik.enable);
+          default = (config.services?authenitk && config.services.authentik.enable);
           description = "Use OIDC authentication with an authentik server";
         };
       };
