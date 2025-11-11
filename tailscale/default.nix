@@ -11,7 +11,7 @@ let
   use-exit-node = if opt.exitNode != "" then [ "--exit-node=${opt.exitNode}" ] else [ ];
   extraSetFlags = advertise-exit-node ++ use-exit-node;
 
-  extraUpFlags = [ "--login-server=https://gateway.irlqt.net" ];
+  extraUpFlags = [ "--login-server=https://connect.irlqt.net" ];
 
   # Check that the interface is even enabled
   cfgCheck = opt.enable;
