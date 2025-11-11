@@ -4,7 +4,7 @@ rec {
   };
   headscale = rec {
     domain = "irlqt.net";
-    login_server = "https://gateway.${domain}";
+    login_server = "https://connect.${domain}";
   };
   tailscale = {
     interface = "irlqt-net";

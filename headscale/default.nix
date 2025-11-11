@@ -10,7 +10,7 @@ let
   # Basedomain
   domain = cfg.headscale.domain;
   # Where new clients can register
-  gateway_subdomain = "gateway.${domain}";
+  gateway_subdomain = "connect.${domain}";
   # MagicDNS will assign every machine a URL using this scheme
   # It cannot overlap with the gateway
   machines_subdomain = "machines.${domain}";
