@@ -11,6 +11,8 @@ let
   use-exit-node = if opt.exitNode != "" then [ "--exit-node=${opt.exitNode}" ] else [ ];
   extraSetFlags = advertise-exit-node ++ use-exit-node;
 
+  extraUpFlags = ["--login-server=https://gateway.irlqt.net"];
+
   # Check that the interface is even enabled
   cfgCheck = opt.enable;
 in
@@ -57,10 +59,10 @@ in
 
         # Use a secret key to register as a new node if you haven't already
         authKeyFile = config.age.secrets.tailscaleNewNodeKey.path;
-        authKeyParameters.baseURL = cfg.headscale.login_server;
+        #authKeyParameters.baseURL = cfg.headscale.login_server;
 
         # Advertise exit node status or use an exit node
-        inherit extraSetFlags;
+        inherit extraSetFlags extraUpFlags;
       };
     };
   };
