@@ -86,7 +86,7 @@ rec {
       ip = {
         v4 = {
           wg = "10.128.0.3";
-          tailnet = "100.64.0.2";
+          tailnet = "100.64.0.4";
           local = "192.168.1.5";
         };
       };
@@ -103,11 +103,11 @@ rec {
       fail2ban = false;
     };
     # Amy's Cell Phone (not managed by this flake)
-    third-lobe = {
+    thirdlobe = {
       ip = {
         v4 = {
           wg = "10.128.0.4";
-          tailnet = "100.64.0.4";
+          tailnet = "100.64.0.5";
           local = "192.168.1.10";
         };
       };
@@ -124,7 +124,7 @@ rec {
         v4 = {
           wg = "10.128.0.5";
           tailnet = "100.64.0.1";
-          local = "192.168.1.4";
+          local = "192.168.1.3";
         };
       };
       ts = {
