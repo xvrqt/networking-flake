@@ -26,8 +26,8 @@ in
         settings = {
           # Optionally enable OIDC auth if we're running an auth server
           oidc = {
-            issuer = "https://${cfg.auth.domain}/application/o/headscale/";
-            client_id = "Gu7qBzf5ONaomeS2p2jXdPTsiKAXfGJnw8WAHtUW";
+            issuer = "https://${cfg.auth.domain}/application/o/irlqt-net/";
+            client_id = "KE9QwH2eHKLpFRTw93TbU24wZ2TpDdYLWPYJ1IQD";
             client_secret_path = config.age.secrets.oidcHeadscaleSecret.path;
 
             # Breaks if enabled
