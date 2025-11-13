@@ -36,6 +36,22 @@ rec {
     nameservers = [ "lighthouse" "archive" ];
   };
   machines = {
+    tavern = {
+      ip = {
+        www = "157.90.167.33";
+        wg = "10.128.0.6";
+        tailnet = "100.64.0.7";
+      };
+      ts = {
+        routingFeatures = "both";
+      };
+      wg = {
+          endpoint = "tavern.machines.xvrqt.com";
+          publicKey = "rwY4sfhDSGyoFtEbolDTFqYTswcqU5UE2P3w8E9oZRk=";
+      };
+      git = "wg";
+      fail2ban = true;
+    };
     # Wireguard
     lighthouse = {
       ip = {
