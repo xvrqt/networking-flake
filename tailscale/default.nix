@@ -11,7 +11,9 @@ let
   use-exit-node = if opt.exitNode != "" then [ "--exit-node=${opt.exitNode}" ] else [ ];
   extraSetFlags = advertise-exit-node ++ use-exit-node;
 
-  extraUpFlags = [ "--login-server=https://connect.irlqt.net" ];
+  # This tag will auto approve exit routes (so long as they're owned by myself)
+  exitTagAutoApprove = if opt.advertiseExitNode then [ "--advertise-tags tag:exit" ] else [ ];
+  extraUpFlags = [ "--login-server=https://connect.irlqt.net" ] ++ exitTagAutoApprove;
 
   # Check that the interface is even enabled
   cfgCheck = opt.enable;
