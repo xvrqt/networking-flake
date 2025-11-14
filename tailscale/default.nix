@@ -12,7 +12,7 @@ let
   extraSetFlags = advertise-exit-node ++ use-exit-node;
 
   # This tag will auto approve exit routes (so long as they're owned by myself)
-  exitTagAutoApprove = if opt.advertiseExitNode then [ "--advertise-tags tag:exit" ] else [ ];
+  exitTagAutoApprove = if opt.advertiseExitNode then [ "--advertise-tags=tag:exit" ] else [ ];
   extraUpFlags = [ "--login-server=https://connect.irlqt.net" ] ++ exitTagAutoApprove;
 
   # Check that the interface is even enabled
