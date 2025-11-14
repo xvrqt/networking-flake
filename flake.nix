@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     # My flake utils
     flake-utils = {
-#      url = "git+https://git.irlqt.net/crow/flake-utils";
+      #      url = "git+https://git.irlqt.net/crow/flake-utils";
       url = "github:xvrqt/flake-utils";
       flake = false;
     };
@@ -15,7 +15,7 @@
   outputs =
     { flake-utils, nixpkgs, secrets, ... }:
     let
-      names = [ "lighthouse" "archive" "spark" "nyaa" "third-lobe" ];
+      names = [ "lighthouse" "archive" "spark" "nyaa" "third-lobe" "tavern" ];
       cfg = import ./cfg.nix;
 
       # Keeping things DRY
