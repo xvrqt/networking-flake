@@ -92,6 +92,7 @@ in
           mapping =
             let
               self = machines."${name}".ip.v4.tailnet;
+              tavern = machines.tavern.ip.v4.tailnet;
               archive = machines.archive.ip.v4.tailnet;
               lighthouse = machines.lighthouse.ip.v4.tailnet;
             in
@@ -102,7 +103,9 @@ in
 
               # Services hosted by the Lighthouse (this node)
               "irlqt.net" = lighthouse;
-              "mail.irlqt.me" = lighthouse;
+              "mail.irlqt.me" = tavern;
+              "email.irlqt.me" = tavern;
+              "ldap.irlqt.me" = lighthouse;
               "connect.irlqt.net" = machines.lighthouse.ip.v4.www;
 
               # Services Hosted by the Archive
