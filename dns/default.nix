@@ -103,9 +103,9 @@ in
 
               # Services hosted by the Lighthouse (this node)
               "irlqt.net" = lighthouse;
-              "mail.irlqt.me" = tavern;
-              "email.irlqt.me" = tavern;
-              "ldap.irlqt.me" = lighthouse;
+              "mail.irlqt.net" = tavern;
+              "email.irlqt.net" = tavern;
+              "ldap.irlqt.net" = lighthouse;
               "connect.irlqt.net" = machines.lighthouse.ip.v4.www;
 
               # Services Hosted by the Archive
