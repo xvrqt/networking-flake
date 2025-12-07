@@ -132,6 +132,7 @@ in
               "public.monero.nodes.archive.irlqt.net" = archive;
 
               "copyparty.irlqt.net" = archive;
+              "social.irlqt.net" = tavern;
             };
         };
 
