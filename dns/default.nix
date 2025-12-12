@@ -110,7 +110,7 @@ in
               "dns.irlqt.net" = self;
 
               # Services hosted by the Lighthouse (this node)
-              "irlqt.net" = lighthouse;
+              "irlqt.net" = tavern;
               "mail.irlqt.net" = tavern;
               "email.irlqt.net" = tavern;
               "ldap.irlqt.net" = lighthouse;
@@ -140,6 +140,7 @@ in
               "public.monero.nodes.archive.irlqt.net" = archive;
 
               "copyparty.irlqt.net" = archive;
+              "social.irlqt.net" = tavern;
             };
         };
 
