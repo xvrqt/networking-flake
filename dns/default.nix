@@ -62,8 +62,15 @@ in
       enable = true;
 
       settings = {
-        ports.dns = dnsPort;
+        # ports.dns = dnsPort;
+        ports.dns = [ "100.64.0.1:53" "10.128.0.1:53" "127.0.0.1:53" ];
+        # ports.dns = "127.0.0.1:53";
         ports.http = httpPort;
+
+        # network.listen = [
+        #   "100.64.0.1:53"
+        #   "10.128.0.1:53"
+        # ];
 
         caching = {
           maxTime = "5m";
@@ -73,7 +80,8 @@ in
         # Where to look up records if you don't have them
         upstreams = {
           groups = {
-            default = dns.quad9.tls ++ dns.quad9.https;
+            # default = dns.quad9.tls ++ dns.quad9.https;
+            default = dns.quad9.gay;
           };
           timeout = "3s";
           strategy = "parallel_best";

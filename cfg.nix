@@ -28,8 +28,10 @@ rec {
         v4 = [ "9.9.9.9" "149.112.112.112" ];
         v6 = [ "2620:fe::fe" "2620:fe::9" ];
       };
-      https = [ "https://dns.quad9.net/dns-query" ];
-      tls = [ "tcp-tls:dns.quad9.net" ];
+      #
+      # https = [ "https://dns.quad9.net/dns-query" ];
+      # tls = [ "tcp-tls:dns.quad9.net" ];
+      gay = [ "tcp-tls:1.1.1.1" ];
     };
 
     # Machines which act as nameservers
