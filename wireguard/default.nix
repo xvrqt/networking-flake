@@ -18,7 +18,7 @@ let
   create_peer_attrset = machine: {
     name = machine.name;
     publicKey = "${machine.wg.publicKey}";
-    endpoint = lib.mkIf (machine?endpoint) machine.ip.v4.www;
+    endpoint = lib.mkIf (machine.wg?endpoint) "${machine.ip.v4.www}:${toString port}";
     allowedIPs = [ "${machine.ip.v4.wg}/32" ];
     persistentKeepalive = pka;
   };
