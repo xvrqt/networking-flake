@@ -2,6 +2,7 @@
 let
   dns = cfg.dns;
   machines = cfg.machines;
+  this_machine = machines.${name};
 
   # Where to serve DNS requests
   dnsPort = 53;
@@ -63,7 +64,7 @@ in
 
       settings = {
         # ports.dns = dnsPort;
-        ports.dns = [ "100.64.0.1:53" "10.128.0.1:53" "127.0.0.1:53" ];
+        ports.dns = [ "${this_machine.ip.v4.tailnet}:53" "${this_machine.ip.v4.wg}:53" "127.0.0.1:53" "[::1]:53"];
         # ports.dns = "127.0.0.1:53";
         ports.http = httpPort;
 
