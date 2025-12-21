@@ -111,7 +111,7 @@ in
               "dns.irlqt.net" = self;
 
               # Services hosted by the Lighthouse (this node)
-              "irlqt.net" = tavern;
+              "irlqt.net" = machines.tavern.ip.v4.www;
               "mail.irlqt.net" = tavern;
               "email.irlqt.net" = tavern;
               "ldap.irlqt.net" = lighthouse;
