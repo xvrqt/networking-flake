@@ -64,7 +64,7 @@ in
 
       settings = {
         # ports.dns = dnsPort;
-        ports.dns = [ "${this_machine.ip.v4.tailnet}:53" "${this_machine.ip.v4.wg}:53" "127.0.0.1:53" "[::1]:53"];
+        ports.dns = [ "${this_machine.ip.v4.tailnet}:53" "${this_machine.ip.v4.wg}:53" "127.0.0.1:53" "[::1]:53" ];
         # ports.dns = "127.0.0.1:53";
         ports.http = httpPort;
 
@@ -119,6 +119,7 @@ in
 
               # Services Hosted by the Archive
               "git.irlqt.net" = archive;
+              "irc.irlqt.net" = tavern;
               "immich.irlqt.net" = archive;
               "irlqt.me" = archive;
               "jellyseerr.irlqt.net" = archive;
