@@ -74,8 +74,11 @@ in
         # ];
 
         caching = {
-          maxTime = "5m";
+          minTime = "5min";
+          maxTime = "60m";
           prefetching = true;
+          prefetchExpires = "2h";
+          prefetchThreshold = 5;
         };
 
         # Where to look up records if you don't have them
