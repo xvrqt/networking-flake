@@ -74,7 +74,7 @@ in
         # ];
 
         caching = {
-          minTime = "5min";
+          minTime = "5m";
           maxTime = "60m";
           prefetching = true;
           prefetchExpires = "2h";
