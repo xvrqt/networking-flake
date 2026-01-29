@@ -43,6 +43,11 @@ in
   };
 
   # Act as a DNS server
+  systemd.services.blocky = lib.mkIf is_nameserver {
+    after = [ "tailscaled.service" "network-online.target" ];
+    requires = [ "tailscaled.service" ];
+  };
+
   services = lib.mkIf is_nameserver {
     # Reverse proxy so people outside the irlqt-net can use the DNS without
     # leaking their requests
