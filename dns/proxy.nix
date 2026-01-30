@@ -10,6 +10,8 @@ let
   httpPort = config.networking.dns.server.settings.httpProxy.port;
 
   machine = cfg.machines.${name};
+  amy_net = machine.ip.v4.wg;
+  irlqt_net = machine.ip.v4.tailnet;
 in
 {
   # Reverse proxy so people outside the irlqt-net can use the DNS without
@@ -22,7 +24,7 @@ in
     # Only allow internal people to use this endpoint
     # TODO update this based on what networks this machine is connected to
     # Also if it allows clear net open resolver etc.
-    listenAddresses = [ "10.128.0.1" "100.64.0.1" ];
+    listenAddresses = [ amy_net irlqt_net ];
     locations."/" = {
       proxyPass = "http://127.0.0.1:${(builtins.toString httpPort)}";
       proxyWebsockets = false;
