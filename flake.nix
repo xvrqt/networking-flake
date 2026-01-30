@@ -41,7 +41,7 @@
             # Configure the Headscale coordination server on Lighthouse
             (import ./headscale { inherit cfg lib name utils config; })
             # Sets nameservers, and sets up DNS servers for certain machines
-            (import ./dns { inherit cfg lib pkgs name; })
+            (import ./dns { inherit cfg lib pkgs name utils config; })
             # Use Fail2Ban to help reduce malicious traffic
             (import ./fail2ban { inherit lib cfg name; })
           ];
