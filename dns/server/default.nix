@@ -1,11 +1,9 @@
-{ cfg, lib, pkgs, name, utils, config, ... }:
+{ cfg, lib, name, config, ... }:
 let
-  dns = cfg.dns;
-
   # List of domains to return NOLOOKUP
   blocks = import ./blocks.nix;
   # Custom DNS entires (domain key, IP a ddr value)
-  entries = import./entires.nix;
+  entries = import ./entries.nix;
 
   # If this machine should also act as a DNS server
   is_nameserver = config.networking.dns.server.enable;
@@ -15,11 +13,6 @@ let
   this_machine = machines.${name};
 in
 {
-  imports = [
-    # Custom DNS entries
-    (import ./entries.nix { inherit cfg lib name config; })
-  ];
-
   config = lib.mkIf is_nameserver {
 
     # TODO test if irlqt net is even running
@@ -27,7 +20,6 @@ in
       after = [ "tailscaled.service" "network-online.target" ];
       requires = [ "tailscaled.service" ];
     };
-
 
     services = {
       # Ensure we're not running resolved by default
@@ -41,16 +33,16 @@ in
           # TODO make this bind to interfaces dynamically
           ports = {
             # Which interfaces to bind to and ports to listen on 
-            dns = [ "${this_machine.ip.v4.tailnet}:53" "${this_machine.ip.v4.wg}:53" "127.0.0.1:53" "::1:53" ];
+            dns = [ "${this_machine.ip.v4.tailnet}:53" "${this_machine.ip.v4.wg}:53" "127.0.0.1:53" "[::1]:53" ];
             tls = 853;
             # We can use this in conjunction with our NGINX reverse proxy
-            http = config.networking.dns.server.httpProxy.port;
+            http = config.networking.dns.server.settings.httpProxy.port;
             https = 4453;
           };
 
           # Upstreams have this already, if we try to do it too it may cause
           # resolution failures
-          dnssec = false;
+          # dnssec = false;
 
           caching = {
             minTime = "5m";
@@ -66,12 +58,12 @@ in
           upstreams = {
             groups.default = [
               "https://dns.adguard-dns.com/dns-query"
-              "tls://dns.adguard-dns.com"
-              "https://freedns.controld.com/p0"
-              "tls://p0.freedns.controld.com"
+              # "tls://dns.adguard-dns.com"
+              # "https://freedns.controld.com/p0"
+              # "tls://p0.freedns.controld.com"
               "https://doh.mullvad.net/dns-query"
-              "tls://doh.mullvad.net"
-              "tls://dns.quad9.net:853"
+              # "tls://doh.mullvad.net"
+              # "tls://dns.quad9.net:853"
             ];
 
             # Make two queries and use whichever returns first
@@ -82,23 +74,80 @@ in
           };
 
           # Used to lookup and resolve domain names used in the upstreams list
-          # Using Quad1 and Google to distribute risk they all go down
-          bootstrapDns = {
-            upstream = "tls://9.9.9.9:853";
-            # ips = [ "9.9.9.9" "1.1.1.1" "8.8.8.8" ];
-            # upstream = "https://one.one.one.one/dns-query";
-          };
+          bootstrapDns = [
+            "tcp+udp:9.9.9.9:53"
+          ];
 
           # Custom DNS entries
-          customDNS.mapping = entries;
-        };
+          # customDNS.mapping = entries;
+          customDNS.mapping =
+            let
+              # Convienence
+              machines = cfg.machines;
+              self = machines."${name}".ip.v4.tailnet;
+              tavern = machines.tavern.ip.v4.tailnet;
+              archive = machines.archive.ip.v4.tailnet;
+              lighthouse = machines.lighthouse.ip.v4.tailnet;
+            in
+            {
+              # DNS over HTTPS service
+              # Points the the machine running this DNS service
+              "dns.irlqt.net" = self;
 
-        # List of lists of domains to return NOLOOKUP when requested
-        blocking = {
-          denylists = with blocks; { inherit ads suspicious malware tracking; };
-          # Block everything for everyone by default
-          clientGroupsBlock = {
-            default = [ "ads" "suspicious" "malware" "tracking" ];
+              #############
+              # CLEAR NET #
+              #############
+              # Services *anyone* can access
+              # Authentik Login
+              "auth.irlqt.net" = machines.lighthouse.ip.v4.www;
+              # Tailscale Coordination Server
+              "connect.irlqt.net" = machines.lighthouse.ip.v4.www;
+              # Public sharing of Immich photos
+              "immich.public.irlqt.net" = machines.archive.ip.v4.www;
+              # Sharkey instance
+              "irlqt.net" = machines.tavern.ip.v4.www;
+
+              #############
+              # IRLQT-NET #
+              #############
+              # Services only available on the IRLQT-NET
+              "copyparty.irlqt.net" = archive;
+              "git.irlqt.net" = archive;
+              "immich.irlqt.net" = archive;
+              "jellyfin.irlqt.net" = archive;
+              "jellyseerr.irlqt.net" = archive;
+              "lidarr.irlqt.net" = archive;
+              "nzbget.irlqt.net" = archive;
+              "plex.irlqt.net" = archive;
+              "prowlarr.irlqt.net" = archive;
+              "public.monero.nodes.archive.irlqt.net" = archive;
+              "radarr.irlqt.net" = archive;
+              "search.irlqt.net" = archive;
+              "sonarr.irlqt.net" = archive;
+              "torrents.irlqt.net" = archive;
+              "wiki.irlqt.net" = archive;
+
+              "email.irlqt.net" = tavern;
+              "mail.irlqt.net" = tavern;
+
+              # Deprecated
+              "irc.irlqt.net" = tavern;
+              "irlqt.me" = archive;
+              "ldap.irlqt.net" = lighthouse;
+              "navidrome.irlqt.net" = archive;
+              "public.immich.irlqt.net" = archive;
+              "slsk.irlqt.net" = archive;
+              "social.irlqt.net" = tavern;
+            };
+
+          # List of lists of domains to return NOLOOKUP when requested
+          blocking = {
+            denylists = with blocks;
+              { inherit ads suspicious malicious tracking; };
+            # Block everything for everyone by default
+            clientGroupsBlock = {
+              default = [ "ads" "suspicious" "malicious" "tracking" ];
+            };
           };
         };
       };

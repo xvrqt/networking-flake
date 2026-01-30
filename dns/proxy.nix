@@ -3,18 +3,18 @@ let
   # If the reverse proxy is setup, and a DNS server is setup and the user wants
   # an HTTPS Reverse Proxy
   reverse_proxy_present = config.services?websites && config.services.websites?enable;
-  httpProxyCfgCheck = config.networking.dns.server.enable;
+  httpProxyCfgCheck = config.networking.dns.server.settings.httpProxy.enable;
   cfgCheck = config.networking.dns.server.enable && reverse_proxy_present && httpProxyCfgCheck;
 
   # The port the local DNS server is listening on
-  httpPort = config.networking.dns.server.httpProxy.port;
+  httpPort = config.networking.dns.server.settings.httpProxy.port;
 
   machine = cfg.machines.${name};
 in
 {
   # Reverse proxy so people outside the irlqt-net can use the DNS without
   # leaking their requests
-  nginx.virtualHosts."${cfg.dns.domain}" = lib.mkIf cfgCheck {
+  services.nginx.virtualHosts."${cfg.dns.domain}" = lib.mkIf cfgCheck {
     forceSSL = true;
     acmeRoot = null;
     enableACME = true;
