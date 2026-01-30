@@ -58,12 +58,14 @@ in
           upstreams = {
             groups.default = [
               "https://dns.adguard-dns.com/dns-query"
-              # "tls://dns.adguard-dns.com"
-              # "https://freedns.controld.com/p0"
-              # "tls://p0.freedns.controld.com"
               "https://doh.mullvad.net/dns-query"
-              # "tls://doh.mullvad.net"
-              # "tls://dns.quad9.net:853"
+              "https://dns.quad9.net/dns-query"
+              "tcp-tls:9.9.9.9:853"
+              "tcp-tls:dns.quad9.net:853"
+              "tcp-tls:dns.adguard-dns.com"
+              "tcp-tls:p0.freedns.controld.com"
+              "tcp-tls:doh.mullvad.net"
+              "tcp-tls:dns.quad9.net:853"
             ];
 
             # Make two queries and use whichever returns first
