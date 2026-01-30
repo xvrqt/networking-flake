@@ -1,24 +1,9 @@
 { cfg, lib, pkgs, name, utils, config, ... }:
 let
   dns = cfg.dns;
-  machines = cfg.machines;
-  this_machine = machines.${name};
-
-  # Where to serve DNS requests
-  dnsPort = 53;
-  httpPort = config.networking.dns.server.httpProxy.port;
-
-  # Convenience variable to keep things DRY
-  allBlockGroups = [ "ads" "suspicious" "tracking" "malicious" ];
 
   # If this machine should also act as a DNS server
   is_nameserver = config.networking.dns.server.enable;
-
-  # Only allow requests made over secure interfaces
-  wg_ip = "${cfg.machines."${name}".ip.v4.wg}:${toString dnsPort}";
-  tailnet_ip = "${cfg.machines."${name}".ip.v4.tailnet}:${toString dnsPort}";
-  local_ip = "127.0.0.1:${toString dnsPort}";
-  blockyDNSPort = [ tailnet_ip wg_ip local_ip ];
 in
 {
   imports = [
@@ -51,15 +36,9 @@ in
 
       # Open ports to allow connection to the DNS server
       firewall = lib.mkIf is_nameserver {
-        allowedTCPPorts = [ dnsPort ];
-        allowedUDPPorts = [ dnsPort ];
+        allowedTCPPorts = [ 53 ];
+        allowedUDPPorts = [ 53 ];
       };
-
-      # If we're a nameserver, have resolvConf use Blocky the resolver
-      # resolvconf = lib.mkIf is_nameserver {
-      #   enable = true;
-      #   useLocalResolver = true;
-      # };
     };
 
     # Use systemd-resolved to handle system DNS requests

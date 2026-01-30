@@ -29,6 +29,7 @@ in
                 default = httpProxyCfgCheck;
                 description = "Runs a reverse proxy at \"dns.irlqt.net\" which allows for encrypted DNS requests over HTTPS.\n This is sort of pointless because we never run open resolvers anyways, and all traffic to the DNS would be over an encrypted interface anyways.";
               };
+
               port = lib.mkOption {
                 type = lib.types.int;
                 default = 5300;
