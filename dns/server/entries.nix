@@ -21,7 +21,7 @@ in
   # Tailscale Coordination Server
   "connect.irlqt.net" = machines.lighthouse.ip.v4.www;
   # Public sharing of Immich photos
-  "immich.public.irlqt.net" = machines.archive.ip.v4.www;
+  "immich.public.irlqt.net" = machines.tavern.ip.v4.www;
   # Sharkey instance
   "irlqt.net" = machines.tavern.ip.v4.www;
 
