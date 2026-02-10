@@ -32,7 +32,7 @@ in
         # If you're running a DNS server then just use yourself 
         # TODO only add personal DNS servers based on available interfaces
         if is_nameserver then [ "127.0.0.1" "::1" ]
-        else dns.personal ++ dns.quad9.ip.v4 ++ dns.quad9.ip.v6;
+        else dns.personal ++ dns.quad9.v4 ++ dns.quad9.v6;
 
       # Open ports to allow connection to the DNS server
       firewall = lib.mkIf is_nameserver {
