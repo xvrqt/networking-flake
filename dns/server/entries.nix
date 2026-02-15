@@ -40,13 +40,15 @@ in
   "prowlarr.irlqt.net" = archive;
   "public.monero.nodes.archive.irlqt.net" = archive;
   "radarr.irlqt.net" = archive;
-  "search.irlqt.net" = archive;
   "sonarr.irlqt.net" = archive;
   "torrents.irlqt.net" = archive;
   "wiki.irlqt.net" = archive;
 
   "email.irlqt.net" = tavern;
   "mail.irlqt.net" = tavern;
+
+  # Available behind SSO
+  "search.irlqt.net" = tavern;
 
   # Deprecated
   "irc.irlqt.net" = tavern;
