@@ -10,41 +10,7 @@ let
   # Grab the specific machine we're configuring
   machines = cfg.machines;
   machine = machines."${name}";
-
-  # Remove ourselves from our peers
-  machine_list = lib.attrsets.mapAttrsToList (name: value: value // { inherit name; }) machines;
-  wome_list = builtins.filter (machine: machine.name != name) machine_list;
-  peers =
-    if (machine.wg?endpoint)
-    # If we're an endpoint then connect directly to all machines
-    then map create_peer_attrset wome_list
-    # If we're not an endpoint ,then only connect directly to endpoints
-    else
-    # First remove all the non-endpoints
-    # Then create peer attrsets for each endpoint /24
-      map create_endpoint_attrset (builtins.filter (machine: machine.wg?endpoint) wome_list);
-
-  # Function which creates a peer entry for each peer machine
-  create_peer_attrset = machine: {
-    name = machine.name;
-    publicKey = "${machine.wg.publicKey}";
-    endpoint = lib.mkIf (machine.wg?endpoint) "${machine.ip.v4.www}:${toString port}";
-    allowedIPs = [ "${machine.ip.v4.wg}/32" ];
-    persistentKeepalive = pka;
-    dynamicEndpointRefreshSeconds = 15;
-    dynamicEndpointRefreshRestartSeconds = 30;
-  };
-  create_endpoint_attrset = machine: {
-    name = machine.name;
-    publicKey = "${machine.wg.publicKey}";
-    endpoint = lib.mkIf (machine.wg?endpoint) "${machine.ip.v4.www}:${toString port}";
-    allowedIPs = [ "${machine.ip.v4.wg}/${machine.wg.cidr}" ];
-    persistentKeepalive = pka;
-    dynamicEndpointRefreshSeconds = 15;
-    dynamicEndpointRefreshRestartSeconds = 30;
-  };
-  # A list of peer attribute sets
-  # peers = map create_peer_attrset peer_list;
+  peers = machine.wg.peers;
 in
 {
   options = {
