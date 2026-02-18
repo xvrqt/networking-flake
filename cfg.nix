@@ -45,7 +45,7 @@ rec {
   machines =
     let
       # Generates a peer which has no endpoint and can only route to itself
-      cfg_sub = name: cfg_peer name "" [ "${machines."${name}".ip.v4.wg}/32" ];
+      cfg_sub = name: cfg_peer name null [ "${machines."${name}".ip.v4.wg}/32" ];
 
       cfg_peer = name: net: allowedIPs: {
         inherit name allowedIPs;
@@ -76,10 +76,11 @@ rec {
           cidr = "32";
           publicKey = "rwY4sfhDSGyoFtEbolDTFqYTswcqU5UE2P3w8E9oZRk=";
           peers = [
-            (cfg_peer
-              "lighthouse"
-              "www"
-              [ "${wireguard.subnet}/24" ])
+            (cfg_sub "archive")
+            (cfg_peer "lighthouse" "www" [ "${machines.lighthouse.ip.v4.wg}/32" ])
+            (cfg_sub "nyaa")
+            (cfg_sub "spark")
+            (cfg_sub "thirdlobe")
           ];
         };
         git = "tailnet";

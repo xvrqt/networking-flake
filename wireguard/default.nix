@@ -21,7 +21,6 @@ in
           default = true;
           description = "Create Wireguard interface 'amy-net' which connects all my machines.";
         };
-
       };
     };
   };
@@ -46,7 +45,13 @@ in
 
     # If we are publicly available for other machines to connect to use, ensure
     # the Wireguard UDP port is open
-    networking.firewall = lib.mkIf (machine.wg?endpoint) {
+    networking.firewall = {
+      # nat = {
+      #   enable = true;
+      #   internalInterfaces = [ "amy-net" ];
+      #   externalInterfaces = [ "eth0" ];
+      # };
+      # TODO only endpoints
       allowedUDPPorts = [ port ];
     };
 
