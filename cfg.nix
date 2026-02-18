@@ -11,6 +11,7 @@ rec {
   };
   wireguard = {
     interface = "amy-net";
+    subnet = "10.128.0.0\9";
   };
   dns = {
     domain = "dns.irlqt.net";
@@ -49,7 +50,8 @@ rec {
         routingFeatures = "both";
       };
       wg = {
-        endpoint = "tavern.machines.xvrqt.com";
+        # endpoint = "tavern.machines.xvrqt.com";
+        cidr = "32";
         publicKey = "rwY4sfhDSGyoFtEbolDTFqYTswcqU5UE2P3w8E9oZRk=";
       };
       git = "tailnet";
@@ -71,6 +73,7 @@ rec {
 
       wg = {
         endpoint = "lighthouse.machines.xvrqt.com";
+        cidr = "24";
         publicKey = "CZc/OcuvBGUGDSll32yIidvPZr4WWRpKhs/a/ccPuWA=";
       };
 
@@ -93,7 +96,7 @@ rec {
       };
 
       wg = {
-        endpoint = "archive.machines.xvrqt.com";
+        # endpoint = "archive.machines.xvrqt.com";
         publicKey = "SvnDMnuK8ZN+pED7rjhqhQUMq46cui/LrYurhfvHi2U=";
       };
 
