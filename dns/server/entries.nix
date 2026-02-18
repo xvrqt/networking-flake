@@ -48,7 +48,7 @@ in
   "mail.irlqt.net" = tavern;
 
   # Available behind SSO
-  "search.irlqt.net" = tavern;
+  "search.irlqt.net" = archive;
 
   # Deprecated
   "irc.irlqt.net" = tavern;
