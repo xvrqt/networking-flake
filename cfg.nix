@@ -72,14 +72,14 @@ rec {
           routingFeatures = "both";
         };
         wg = {
-          # endpoint = "tavern.machines.xvrqt.com";
+          endpoint = true;
           cidr = "32";
           publicKey = "rwY4sfhDSGyoFtEbolDTFqYTswcqU5UE2P3w8E9oZRk=";
           peers = [
             (cfg_peer
               "lighthouse"
               "www"
-              [ "10.128.0.0/24 " ])
+              [ "${wireguard.subnet}/24" ])
           ];
         };
         git = "tailnet";
@@ -103,7 +103,7 @@ rec {
         };
 
         wg = {
-          endpoint = "lighthouse.machines.xvrqt.com";
+          endpoint = true;
           cidr = "24";
           publicKey = "CZc/OcuvBGUGDSll32yIidvPZr4WWRpKhs/a/ccPuWA=";
           peers = [
@@ -135,6 +135,7 @@ rec {
         };
 
         wg = {
+          endpoint = true;
           publicKey = "SvnDMnuK8ZN+pED7rjhqhQUMq46cui/LrYurhfvHi2U=";
           peers = [
             (cfg_peer
@@ -228,6 +229,7 @@ rec {
         };
         wg = {
           publicKey = "tHzr/Ej6G0qSX5mpn7U48ucdwk9TVuHZyxrDRfID50c=";
+          endpoint = true;
           peers = [
             (cfg_peer
               "archive"
