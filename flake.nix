@@ -33,7 +33,7 @@
             # General network settings that should be in effect across all devices
             (import ./general.nix { inherit cfg lib pkgs name utils config; })
             # Configure the Wireguard interface
-            (import ./wireguard { inherit cfg lib name config; })
+            # (import ./wireguard { inherit cfg lib name config; })
             # Configure the Tailnet
             (import ./tailscale { inherit lib cfg pkgs name utils config; })
             # Configure the Headscale coordination server on Lighthouse
